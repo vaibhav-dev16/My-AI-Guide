@@ -1,12 +1,33 @@
-langchain 
-openai 
-chromadb 
-streamlit 
-tiktoken 
-unstructured 
-python-docx 
-pdfminer.six
-sentence-transformers
-langchain-community
-langchain-huggingface
-langchain-openai
+# Core LangChain - using older version that supports both old and new imports
+langchain==0.1.20
+langchain-community==0.0.38
+langchain-core==0.1.52
+langchain-huggingface==0.0.3
+langchain-openai==0.1.6
+langchain-text-splitters==0.0.1
+
+# Vector database and embeddings
+chromadb==0.4.24
+sentence-transformers==2.7.0
+
+# Document processing
+python-docx==1.1.0
+pdfminer.six==20231228
+unstructured==0.11.8
+
+# LLM and AI
+openai==1.24.0
+
+# Web framework
+streamlit==1.32.0
+
+# Utilities
+python-dotenv==1.0.1
+tiktoken==0.7.0
+
+# Search tool
+duckduckgo-search==5.3.0
+
+# Additional dependencies
+numpy>=1.26.0
+requests>=2.31.0

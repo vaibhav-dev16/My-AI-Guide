@@ -15,15 +15,25 @@ DEEPSEE_BASE_URL = os.getenv("DEEPSEEK_API_BASE")
 
 def create_rag_chain(retriever):
     """
-    Create a Conversational RAG chain using DeepSeek-compatible LLM.
+    Create a Conversational RAG chain using compatible LLM initialization.
     """
 
-    llm = ChatOpenAI(
-        temperature=0,
-        model="deepseek-chat",  # Optional: use DeepSeek's model name if required
-        base_url=DEEPSEE_BASE_URL,
-        api_key=DEEPSEE_API_KEY
-    )
+    # Simple ChatOpenAI initialization without problematic parameters
+    if DEEPSEE_API_KEY and DEEPSEE_BASE_URL:
+        # Use DeepSeek configuration
+        llm = ChatOpenAI(
+            model_name="deepseek-chat",
+            temperature=0,
+            openai_api_key=DEEPSEE_API_KEY,
+            openai_api_base=DEEPSEE_BASE_URL
+        )
+    else:
+        # Fallback to dummy configuration for testing
+        llm = ChatOpenAI(
+            model_name="gpt-3.5-turbo",
+            temperature=0,
+            openai_api_key="dummy-key-for-testing"
+        )
 
     memory = ConversationBufferMemory(
         memory_key="chat_history",
