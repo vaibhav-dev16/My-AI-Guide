@@ -12,6 +12,9 @@ import os
 load_dotenv()
 DEEPSEE_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 DEEPSEE_BASE_URL = os.getenv("DEEPSEEK_API_BASE")
+DEEPSEE_MODEL = os.getenv("DEEPSEEK_MODEL")
+TEMPRATURE = os.getenv("TEMPRATURE")
+
 
 def create_rag_chain(retriever):
     """
@@ -22,8 +25,8 @@ def create_rag_chain(retriever):
     if DEEPSEE_API_KEY and DEEPSEE_BASE_URL:
         # Use DeepSeek configuration
         llm = ChatOpenAI(
-            model_name="deepseek-chat",
-            temperature=0,
+            model_name=DEEPSEE_MODEL,
+            temperature=TEMPRATURE,
             openai_api_key=DEEPSEE_API_KEY,
             openai_api_base=DEEPSEE_BASE_URL
         )

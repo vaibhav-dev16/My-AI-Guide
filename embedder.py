@@ -1,12 +1,17 @@
 # from langchain.vectorstores import Chroma
-from langchain_community.vectorstores import Chroma
 # from langchain.embeddings import SentenceTransformerEmbeddings
-from langchain_huggingface import HuggingFaceEmbeddings
+# from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.schema import Document
-from langchain_openai import OpenAIEmbeddings
-from typing import List
+
+from langchain_community.vectorstores import Chroma
+# from langchain.embeddings import HuggingFaceEmbeddings
+from typing import Union, List, Dict
 import chromadb
 from chromadb.config import Settings
+
+from langchain_core.retrievers import BaseRetriever
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 
 def create_chroma_collection(chunks: List[str], collection_name: str):
@@ -35,23 +40,6 @@ def create_chroma_collection(chunks: List[str], collection_name: str):
     )
 
     return vectorstore
-
-from langchain_community.vectorstores import Chroma
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain_core.retrievers import BaseRetriever
-from typing import Union, List
-import chromadb
-from chromadb.config import Settings
-
-
-from typing import Dict, Union
-from langchain_core.retrievers import BaseRetriever
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
-
-
-import chromadb
-from chromadb.config import Settings
 
 def get_retriever(collection_name: str = None) -> Dict[str, Dict[str, Union[Chroma, BaseRetriever]]]:
     """
