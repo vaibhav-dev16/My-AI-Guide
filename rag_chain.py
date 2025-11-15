@@ -95,17 +95,27 @@ def create_multi_collection_rag_chain(retrievers: Union[BaseRetriever, List[Base
 
     # Prompt template
     prompt = PromptTemplate(
-        input_variables=["context", "question"],
-        template="""
-                You are an AI assistant. Use the following context to answer the question conversationally.
+    input_variables=["context", "question"],
+    template="""
+            You are an AI assistant. Use the following context to answer the question in a conversational and helpful way.
 
-                Context:
-                {context}
+            If you cannot answer the question using the given context, you must **suggest a tool call** in JSON format to the tool named `make_notes`.
 
-                Question:
-                {question}
-                """
-                )
+            The JSON output must follow this exact format:
+            {{
+            "tool_name": "make_notes",
+            "message": "Explain briefly why the tool needs to be used (e.g., insufficient data in context)"
+            }}
+
+            Do not include any additional text outside of the JSON when suggesting a tool call.
+
+            Context:
+            {context}
+
+            Question:
+            {question}
+            """
+            )
 
     # LLM instance
     llm = ChatOpenAI(temperature=0, model="deepseek-chat")  # add API key/base_url if needed
